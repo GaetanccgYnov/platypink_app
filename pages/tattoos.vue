@@ -1,7 +1,6 @@
 <template>
 <title>Tattoos</title>
-<body class="font-montserrat">
-<div class="p-4"
+<div class="p-4 font-montserrat"
      id="app">
     <div class="flex">
         <div class="w-1/4 p-4 bg-white rounded-lg shadow">
@@ -178,7 +177,6 @@
         </div>
     </div>
 </div>
-</body>
 </template>
 <script>
     import TattooCard from '~/components/TattooCard.vue'
