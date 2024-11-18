@@ -6,9 +6,11 @@
 
     <div>
         <carousel :items-to-show="1.5"
+                  :autoplay="7000"
                   :wrapAround="true">
             <slide v-for="slide in 5"
                    :key="slide"
+                   auto
                    class="slide">
                 {{ slide }}
                 <img src="https://placehold.co/150x150" alt="Artiste" />

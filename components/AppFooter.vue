@@ -2,7 +2,7 @@
   <footer class="footer font-montserrat">
     <div class="footer-columns">
       <div class="footer-column social-icons icon">
-        <font-awesome icon="fa-brands fa-x-twitter" fa-link="https://facebook.com"/>
+        <font-awesome icon="fa-brands fa-twitter" fa-link="https://facebook.com"/>
         <font-awesome icon="fa-brands fa-facebook" />
         <font-awesome icon="fa-brands fa-instagram" />
         <font-awesome icon="fa-brands fa-linkedin" />

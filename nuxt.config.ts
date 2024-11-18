@@ -16,9 +16,9 @@ export default defineNuxtConfig({
   modules: ['@vesp/nuxt-fontawesome', 'vue3-carousel-nuxt'],
     fontawesome: {
   icons: {
-    brands: ['x-twitter', 'facebook', 'instagram', 'linkedin'],
-    solid: ['plus', 'search', 'times', 'heart'],
-    regular: ['heart'],
+    brands: ['twitter', 'facebook', 'instagram', 'linkedin'],
+    solid: ['plus', 'search', 'times', 'heart', 'arrow-right', 'arrow-left', 'phone', 'location-dot', 'star'],
+    regular: ['heart', 'star', 'star-half-stroke'],
   }
 }
 })
