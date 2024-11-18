@@ -2,8 +2,8 @@
     <title>Accueil</title>
     <div class="text-center font-montserrat">
         <div class="py-8 bg-tertiary">
-            <h1 class="text-4xl font-bold font-bangers">Platyp'Ink</h1>
-            <p class="text-gray-500">Parce que chaque ornythorinque mérite son humain</p>
+            <h1 class="text-4xl font-bold font-bangers text-gray">Platyp'Ink</h1>
+            <p class="text-gray">Parce que chaque ornythorinque mérite son humain</p>
         </div>
         <div class="flex justify-center space-x-4 bg-secondary py-4">
             <ArtisteCard />
@@ -25,5 +25,13 @@
 <script setup lang="ts">
     const { data } = await useFetch('https://rickandmortyapi.com/api/character')
 
-    console.log(data.value.results[0].name)
+    if (data.value.results != null) {
+      console.log(data.value.results[0].name)
+    }
 </script>
+
+<style scoped>
+.text-gray {
+    color: #f8f8f8;
+}
+</style>
