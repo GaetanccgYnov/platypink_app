@@ -15,12 +15,13 @@ export default {
         montserrat: ['Montserrat', 'sans-serif']
       },
       colors: {
-        'primary': '#24A7A1',
-        'secondary': '#FF9810',
-        'tertiary': '#562B35'
+        'secondary': '#24A7A1',
+        'tertiary': '#FF9810',
+        'quaternary': '#562B35'
       }
     },
   },
   plugins: [],
+  important: true,
 }
 

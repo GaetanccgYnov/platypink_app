@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@nuxt/ui": "^2.19.2",
     "@vesp/nuxt-fontawesome": "^1.1.0",
+    "axios": "^1.7.7",
     "nuxt": "^3.13.2",
     "vue": "latest",
     "vue-cal": "^4.10.0",
