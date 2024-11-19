@@ -1,11 +1,11 @@
 <template>
-  <Transition name="modal">
-    <div v-if="show"
+    <Transition name="modal">
+        <div v-if="show"
          class="modal-mask">
       <div class="modal-container">
         <div class="modal-header">
           <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold font-bangers">Inscription</h1>
+            <h1 class="text-4xl font-bold font-bangers">Connexion</h1>
           </div>
         </div>
 
@@ -28,7 +28,7 @@
             <div class="mb-6">
               <label class="block text-gray-700 text-sm font-bold mb-2"
                      for="password">
-                Password
+                Mot de passe
               </label>
               <input v-model="password"
                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -45,12 +45,12 @@
               <button class="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="button"
                       @click="submit">
-                Submit
+                Valider
               </button>
               <button class="bg-black text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="button"
                       @click="$emit('close')">
-                Close
+                Fermer
               </button>
             </div>
           </slot>
@@ -85,6 +85,7 @@ export default {
         const token = response.data.token;
         localStorage.setItem('token', token);
         toast.add({title: 'Connexion réussie'});
+        this.$emit('updateUserRole', response.data.user.role);
         this.$emit('close');
       } catch (error) {
         this.errors = true;

@@ -22,12 +22,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
-    const { data } = await useFetch('https://rickandmortyapi.com/api/character')
-
-    if (data.value.results != null) {
-      console.log(data.value.results[0].name)
-    }
+<script>
 </script>
 
 <style scoped>
