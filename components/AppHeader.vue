@@ -24,44 +24,82 @@
             <nav class="flex items-center justify-center space-x-4 flex-1">
                 <a href="/tattoos" class="text-black">Tattoos</a>
                 <a href="/artists" class="text-black">Artistes</a>
+                <a v-if="userRole === 'admin'" href="/" class="text-black">Panel Admin</a>
+                <a v-if="userRole === 'client'" href="/favorites" class="text-black">Favoris</a>
+                <a v-if="userRole === 'tattoo_artist'" href="/admin" class="text-black">Gestion des flashs</a>
             </nav>
 
-            <div class="flex items-center justify-end space-x-4 flex-1">
-                <button class="px-4 py-2 border border-gray-400 rounded">Sign in</button>
+            <div v-if="userRole === ''"
+                 class="flex items-center justify-end space-x-4 flex-1">
+                <button class="px-4 py-2 border border-gray-400 rounded"
+                        @click="openSigninModal = true">
+                    Créer un compte
+                </button>
                 <button class="px-4 py-2 bg-black text-white rounded"
-                        @click="openRegisterModal = true">
-                  Log in
+                        @click="openLoginModal = true">
+                  Se connecter
+                </button>
+            </div>
+            <div v-else
+                 class="flex items-center justify-end space-x-4 flex-1">
+                <button class="px-4 py-2 bg-black text-white rounded"
+                        @click="logOut()">
+                  Se déconnecter
                 </button>
             </div>
         </div>
     </header>
-  <div
-      v-if="openRegisterModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-
-    <Teleport to="body">
-      <login-modal :show="openRegisterModal"
-                   @close="openRegisterModal = false">
-        <template #header>
-          <h3>Custom Header</h3>
-        </template>
-      </login-modal>
-    </Teleport>
-  </div>
+    <div v-if="openLoginModal"
+         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <Teleport to="body">
+            <login-modal :show="openLoginModal"
+                         @close="openLoginModal = false"
+                         @updateUserRole="updateUserRole($event)">
+                <template #header>
+                    <h3>Custom Header</h3>
+                </template>
+            </login-modal>
+        </Teleport>
+    </div>
+    <div v-if="openSigninModal"
+         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <Teleport to="body">
+            <signin-modal :show="openSigninModal"
+                          @close="openSigninModal = false"
+                          @updateUserRole="updateUserRole($event)">
+                <template #header>
+                    <h3>Custom Header</h3>
+                </template>
+            </signin-modal>
+        </Teleport>
+    </div>
 </template>
 
 <script>
+import axios from "axios";
+import apiClient from "~/src/api/axiosConfig.js";
 export default {
     data() {
         return {
             searchQuery: "",
-            openRegisterModal: false
+            openLoginModal: false,
+            openSigninModal: false,
+            userRole: ''
         };
     },
     methods: {
-        clearSearch() {
+          clearSearch() {
             this.searchQuery = "";
-            },
+        },
+        updateUserRole(role) {
+            this.userRole = role;
+        },
+        logOut() {
+            const toast = useToast();
+            localStorage.removeItem('token');
+            this.userRole = '';
+            toast.add({title: 'Déconnexion réussie'});
+        }
     },
 };
 </script>
