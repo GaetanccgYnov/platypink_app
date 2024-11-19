@@ -2,7 +2,7 @@
     <div class="p-4 bg-white shadow-md rounded-lg overflow-hidden flex">
         <div class="relative">
             <img alt="Placeholder image" class="object-cover" src="https://placehold.co/600x400" />
-            <div class="absolute top-2 left-2 bg-black text-white rounded-full p-2">
+            <div class="absolute top-4 left-2 bg-black text-white rounded-full ml-2 flex items-center justify-center w-8 h-8">
                 <font-awesome icon="fa-regular fa-heart" />
             </div>
         </div>

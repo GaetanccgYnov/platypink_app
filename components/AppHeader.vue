@@ -28,10 +28,26 @@
 
             <div class="flex items-center justify-end space-x-4 flex-1">
                 <button class="px-4 py-2 border border-gray-400 rounded">Sign in</button>
-                <button class="px-4 py-2 bg-black text-white rounded">Register</button>
+                <button class="px-4 py-2 bg-black text-white rounded"
+                        @click="openRegisterModal = true">
+                  Log in
+                </button>
             </div>
         </div>
     </header>
+  <div
+      v-if="openRegisterModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
+    <Teleport to="body">
+      <login-modal :show="openRegisterModal"
+                   @close="openRegisterModal = false">
+        <template #header>
+          <h3>Custom Header</h3>
+        </template>
+      </login-modal>
+    </Teleport>
+  </div>
 </template>
 
 <script>
@@ -39,6 +55,7 @@ export default {
     data() {
         return {
             searchQuery: "",
+            openRegisterModal: false
         };
     },
     methods: {
