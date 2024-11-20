@@ -1,0 +1,51 @@
+<!--Admin dashboard, no footer, left sided menu with 4 sections (users, tattoo, booking, other)-->
+
+<template>
+    <div class="admin-dashboard">
+        <SideMenu @navigate="handleNavigation" />
+        <div class="content">
+            <component :is="currentView" />
+        </div>
+    </div>
+</template>
+
+<script setup>
+import {ref} from 'vue';
+
+// Importez vos composants de section
+import UsersSection from '@/components/admin/UserManagement.vue';
+import TattoosSection from '@/components/admin/TattoosManagement.vue';
+import BookingsSection from '@/components/admin/BookingsManagement.vue';
+import OthersSection from '@/components/admin/OthersManagement.vue';
+import SideMenu from '~/components/admin/SideMenu.vue';
+
+// Sections disponibles
+const sections = {
+    users: UsersSection,
+    tattoos: TattoosSection,
+    bookings: BookingsSection,
+    others: OthersSection
+};
+
+// Vue actuellement sélectionnée
+const currentView = ref(sections.users);
+
+// Gestion de la navigation
+function handleNavigation(section) {
+    currentView.value = sections[section] || sections.users;
+}
+</script>
+
+<style scoped>
+.admin-dashboard{
+    display: flex;
+    height: 100vh;
+}
+
+.content{
+    flex: 1;
+    padding: 20px;
+    background: #f9f9f9;
+}
+</style>
+
