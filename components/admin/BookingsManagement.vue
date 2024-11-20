@@ -7,6 +7,7 @@
             :onEdit="editBooking"
             :onDelete="deleteBooking"
             :onCreate="createBooking"
+            :items-per-page
         />
 
         <!-- Modal pour l'édition -->

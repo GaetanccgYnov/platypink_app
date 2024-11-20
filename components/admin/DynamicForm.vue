@@ -81,6 +81,16 @@
                 />
             </div>
 
+            <!-- Input -->
+            <div v-else-if="field.type === 'file'">
+                <input
+                    :id="field.key"
+                    type="file"
+                    @change="handleFileUpload(field.key, $event)"
+                    class="w-full px-3 py-2 border rounded"
+                />
+            </div>
+
             <!-- Other types can be added here -->
         </div>
 

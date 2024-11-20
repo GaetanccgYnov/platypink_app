@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr
-                    v-for="item in items"
+                    v-for="item in paginatedItems"
                     :key="item.id"
                     class="hover:bg-gray-50 transition"
                 >
@@ -57,41 +57,106 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Pagination -->
+        <div v-if="totalPages > 1" class="flex justify-center items-center mt-4 space-x-2">
+            <button
+                @click="previousPage"
+                :disabled="currentPage === 1"
+                class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+            >
+                <i class="fas fa-chevron-left"></i> Précédent
+            </button>
+            <button
+                v-for="page in totalPages"
+                :key="page"
+                @click="goToPage(page)"
+                :class="page === currentPage ? 'bg-blue-600 text-white' : 'bg-gray-300'"
+                class="px-3 py-2 rounded"
+            >
+                {{ page }}
+            </button>
+            <button
+                @click="nextPage"
+                :disabled="currentPage === totalPages"
+                class="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+            >
+                Suivant <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </div>
 </template>
 
 <script setup>
-import {defineProps} from 'vue';
+import {defineProps, ref, computed, watch} from 'vue';
 
-defineProps({
+const props = defineProps({
     title: {
         type: String,
         required: true
     },
     headers: {
         type: Array,
-        required: true // Ex.: ['Nom', 'Email', 'Rôle']
+        required: true
     },
     items: {
         type: Array,
-        required: true // Ex.: [{ id: 1, name: 'John', email: 'john@example.com' }]
+        required: true,
+        default: () => []
     },
     onEdit: {
         type: Function,
-        required: true // Fonction appelée avec l'élément à éditer
+        required: true
     },
     onDelete: {
         type: Function,
-        required: true // Fonction appelée avec l'ID à supprimer
+        required: true
     },
     onCreate: {
         type: Function,
-        required: true // Fonction appelée pour créer un nouvel élément
+        required: true
+    },
+    itemsPerPage: {
+        type: Number,
+        default: 10
     }
 });
 
-// Helper pour formater les clés des headers
+const currentPage = ref(1);
+const totalPages = computed(() => Math.ceil(props.items.length / props.itemsPerPage));
+
+const paginatedItems = computed(() => {
+    if (!props.items || props.items.length === 0) {
+        return [];
+    }
+    const start = (currentPage.value - 1) * props.itemsPerPage;
+    const end = start + props.itemsPerPage;
+    return props.items.slice(start, end);
+});
+
+function goToPage(page) {
+    if (page >= 1 && page <= totalPages.value) {
+        currentPage.value = page;
+    }
+}
+
+function previousPage() {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+}
+
+function nextPage() {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+}
+
+watch(props.items, () => {
+    currentPage.value = 1;
+});
+
 function headerKey(header) {
-    return header.toLowerCase().replace(/\s+/g, '_'); // Transforme 'Nom' -> 'nom' pour correspondre à l'objet
+    return header.toLowerCase().replace(/\s+/g, '_');
 }
 </script>

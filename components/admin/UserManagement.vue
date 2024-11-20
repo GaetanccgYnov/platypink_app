@@ -7,6 +7,7 @@
             :onEdit="editUser"
             :onDelete="deleteUser"
             :onCreate="createUser"
+            :items-per-page="10"
         />
 
         <!-- Modal pour l'édition -->
@@ -205,5 +206,7 @@ async function deleteUser(userId) {
 }
 
 // Charger les utilisateurs au montage
-fetchUsers();
+onMounted(() => {
+    fetchUsers();
+});
 </script>

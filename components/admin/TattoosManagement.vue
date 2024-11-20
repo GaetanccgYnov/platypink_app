@@ -7,6 +7,7 @@
             :onEdit="editTattoo"
             :onDelete="deleteTattoo"
             :onCreate="createTattoo"
+            :items-per-page="10"
         />
 
         <!-- Modal pour l'édition -->
@@ -124,6 +125,11 @@ const fields = ref([
         key: 'description',
         label: 'Description',
         type: 'textarea'
+    },
+    {
+        key: 'image',
+        label: 'Image',
+        type: 'file'
     }
 ]);
 

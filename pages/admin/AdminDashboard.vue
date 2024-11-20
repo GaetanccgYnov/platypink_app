@@ -1,11 +1,14 @@
-<!--Admin dashboard, no footer, left sided menu with 4 sections (users, tattoo, booking, other)-->
-
 <template>
-    <div class="admin-dashboard">
-        <SideMenu @navigate="handleNavigation" />
-        <div class="content">
-            <component :is="currentView" />
+    <div v-if="userRole === 'admin'">
+        <div class="admin-dashboard">
+            <SideMenu @navigate="handleNavigation" />
+            <div class="content">
+                <component :is="currentView" />
+            </div>
         </div>
+    </div>
+    <div v-else>
+        <h1>Vous n'avez pas les droits pour accéder à cette page</h1>
     </div>
 </template>
 
@@ -18,6 +21,8 @@ import TattoosSection from '@/components/admin/TattoosManagement.vue';
 import BookingsSection from '@/components/admin/BookingsManagement.vue';
 import OthersSection from '@/components/admin/OthersManagement.vue';
 import SideMenu from '~/components/admin/SideMenu.vue';
+
+const userRole = ref('');
 
 // Sections disponibles
 const sections = {
@@ -34,6 +39,12 @@ const currentView = ref(sections.users);
 function handleNavigation(section) {
     currentView.value = sections[section] || sections.users;
 }
+
+onMounted(() => {
+    if (localStorage.getItem('role')) {
+        userRole.value = localStorage.getItem('role');
+    }
+});
 </script>
 
 <style scoped>
@@ -48,4 +59,3 @@ function handleNavigation(section) {
     background: #f9f9f9;
 }
 </style>
-
