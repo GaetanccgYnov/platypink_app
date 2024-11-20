@@ -9,6 +9,20 @@
                     Mots-clés
                 </h2>
             </div>
+            <div v-if="isConnected"
+                 class="mb-4">
+                <div class="flex items-center">
+                    <label class="flex items-center cursor-pointer">
+                        <input v-model="favorites"
+                               class="form-checkbox h-4 w-4 text-gray-600"
+                               type="checkbox"
+                               @change="showFavorites"/>
+                        <span class="ml-2 text-gray-700">
+                                    Afficher uniquement les favoris
+                        </span>
+                    </label>
+                </div>
+            </div>
             <div class="mb-4">
                 <h2 class="text-lg font-semibold mb-2">
                     Prix
@@ -164,6 +178,7 @@
 <script>
     import TattooCard from '~/components/TattooCard.vue'
     import axios from "axios";
+    import apiClient from "~/src/api/axiosConfig.js";
     export default {
         components: {
             TattooCard
@@ -190,7 +205,10 @@
                 newest: true,
                 priceAsc: false,
                 priceDesc: false,
-                searchQuery: ''
+                searchQuery: '',
+                isConnected: false,
+                favorites: false,
+                favoriteTattoos: []
             }
         },
         watch: {
@@ -295,6 +313,29 @@
                     this.updatePagination();
                 }
             },
+            showFavorites() {
+                if (this.favorites) {
+                    apiClient('/tattoos?favorites=true')
+                        .then(response => {
+                            this.filteredTattoos = response.data;
+                            this.updatePagination();
+                        });
+                } else {
+                    this.filteredTattoos = this.allTattoos;
+                }
+                this.currentPage = 1;
+                this.updatePagination();
+            }
+        },
+        mounted() {
+             this.isConnected = !!localStorage.getItem('token');
+             // if (this.isConnected) {
+             //     apiClient.get('/favorites')
+             //         .then(response => {
+             //             this.favoriteTattoos = response.data;
+             //         });
+             //     console.log(this.favoriteTattoos)
+             // }
         },
         beforeMount() {
             try {
