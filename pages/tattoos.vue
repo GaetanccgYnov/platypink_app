@@ -276,7 +276,6 @@
                 const start = (this.currentPage - 1) * this.itemsPerPage;
                 const end = start + this.itemsPerPage;
                 this.paginatedTattoos = this.filteredTattoos.slice(start, end);
-                console.log(this.paginatedTattoos)
             },
             goToPage(page) {
                 if (page >= 1 && page <= this.totalPages) {
