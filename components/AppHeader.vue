@@ -11,14 +11,6 @@
                 <a href="/">
                     <img class="hat-logo" src="~/assets/img/hat_logo.png" alt="Logo">
                 </a>
-                <div class="flex items-center border rounded-full px-4">
-                    <input v-model="searchQuery"
-                           type="text"
-                           placeholder="Value"
-                           class="outline-none"
-                    />
-                    <button @click="clearSearch" v-if="searchQuery">✖️</button>
-                </div>
             </div>
 
             <nav class="flex items-center justify-center space-x-4 flex-1">
@@ -76,8 +68,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiClient from "~/src/api/axiosConfig.js";
 export default {
     data() {
         return {
@@ -88,9 +78,6 @@ export default {
         };
     },
     methods: {
-          clearSearch() {
-            this.searchQuery = "";
-        },
         updateUserRole(role) {
             this.userRole = role;
         },

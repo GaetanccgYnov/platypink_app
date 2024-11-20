@@ -1,12 +1,25 @@
 <template>
-    <section>
-        <p>This page will be displayed at the {{ id }} route.</p>
-    </section>
-    <TattooDetailCard />
+    <TattooDetailCard :tattoo="tattoo" />
 </template>
-<script setup>
+<script>
 import { useRoute } from 'vue-router';
+import axios from "axios";
+export default {
+    data() {
+        return {
+            tattoo: []
+        };
+    },
+    beforeMount() {
+        try {
+            axios.get(`http://localhost:5000/tattoos/${this.$route.params.id}`)
+                .then(response => {
+                    this.tattoo = response.data;
+                });
+        } catch (error) {
+            console.error('Erreur lors de la récupération du tatouage :', error);
+        }
+    },
+};
 
-const route = useRoute();
-const id = route.params.id;
 </script>
