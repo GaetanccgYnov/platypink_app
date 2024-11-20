@@ -17,7 +17,6 @@
                 <a href="/tattoos" class="text-black">Tattoos</a>
                 <a href="/artists" class="text-black">Artistes</a>
                 <a v-if="userRole === 'admin'" href="/" class="text-black">Panel Admin</a>
-                <a v-if="userRole === 'client'" href="/favorites" class="text-black">Favoris</a>
                 <a v-if="userRole === 'tattoo_artist'" href="/admin" class="text-black">Gestion des flashs</a>
             </nav>
 
@@ -47,9 +46,6 @@
             <login-modal :show="openLoginModal"
                          @close="openLoginModal = false"
                          @updateUserRole="updateUserRole($event)">
-                <template #header>
-                    <h3>Custom Header</h3>
-                </template>
             </login-modal>
         </Teleport>
     </div>
@@ -59,9 +55,6 @@
             <signin-modal :show="openSigninModal"
                           @close="openSigninModal = false"
                           @updateUserRole="updateUserRole($event)">
-                <template #header>
-                    <h3>Custom Header</h3>
-                </template>
             </signin-modal>
         </Teleport>
     </div>

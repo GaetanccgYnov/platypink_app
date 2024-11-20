@@ -45,7 +45,8 @@ export default {
     },
     data() {
         return {
-            isFavorite: false
+            isFavorite: false,
+            favoriteId: null
         }
     },
     methods: {
@@ -59,21 +60,38 @@ export default {
         },
         changeFavorite() {
             if (localStorage.getItem('token')) {
-                apiClient.post(`/favorites/${this.tattoo.id}`)
-                    .then(response => {
-                        this.isFavorite = response.data.checked;
-                    });
+                if (this.isFavorite) {
+                    apiClient.delete(`/favorites/${this.favoriteId}`)
+                        .then(response => {
+                            this.isFavorite = false;
+                        });
+                } else {
+                    apiClient.post(`/favorites`, {
+                        flash_tattoo_id: this.tattoo.id
+                    })
+                        .then(response => {
+                            this.isFavorite = true;
+                            this.favoriteId = response.data.favorite.id;
+                        });
+                }
             } else {
                 const toast = useToast();
                 toast.add({title: 'Vous devez être connecté pour ajouter un flash en favori', color: 'red'});
             }
-        }
+        },
+        async waitForTattoo() {
+            while (!this.tattoo || !this.tattoo.id) {
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+        },
     },
-    mounted() {
+    async mounted() {
+        await this.waitForTattoo();
         if (localStorage.getItem('token')) {
-            apiClient.get(`/favorites/${this.tattoo.id}`)
+            apiClient.get(`/tattoos/${this.tattoo.id}/favorite`)
                 .then(response => {
                     this.isFavorite = response.data.checked;
+                    this.favoriteId = response.data.favorite_id ?? null;
                 });
         }
     }
