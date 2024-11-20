@@ -74,16 +74,20 @@ export default {
             searchQuery: "",
             openLoginModal: false,
             openSigninModal: false,
-            userRole: ''
+            userRole: '',
         };
+    },
+    mounted() {
+        this.userRole = localStorage.getItem('role') || '';
     },
     methods: {
         updateUserRole(role) {
             this.userRole = role;
+            localStorage.setItem('role', role);
         },
         logOut() {
             const toast = useToast();
-            localStorage.removeItem('token');
+            localStorage.clear();
             this.userRole = '';
             toast.add({title: 'Déconnexion réussie'});
         }
