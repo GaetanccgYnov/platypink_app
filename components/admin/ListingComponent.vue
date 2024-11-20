@@ -33,7 +33,19 @@
                         :key="header"
                         class="px-4 py-2 border border-gray-200"
                     >
-                        {{ item[headerKey(header)] }}
+                        <div v-if="header === 'Image'">
+                            <img
+                                v-if="item.image_url"
+                                :src="item.image_url"
+                                alt="Tattoo Image"
+                                class="object-cover"
+                                style="width: 100px; height: 100px;"
+                            />
+                            <span v-else>Image non disponible</span>
+                        </div>
+                        <div v-else>
+                            {{ item[headerKey(header)] }}
+                        </div>
                     </td>
                     <td class="px-4 py-2 border border-gray-200">
                         <button
@@ -157,6 +169,15 @@ watch(props.items, () => {
 });
 
 function headerKey(header) {
-    return header.toLowerCase().replace(/\s+/g, '_');
+    const headerMap = {
+        'Nom': 'nom',
+        'Prix': 'prix',
+        'Disponible': 'disponible',
+        'Taille': 'taille',
+        'Couleur': 'couleur',
+        'Description': 'description',
+        'Image': 'image_url' // Correspond bien à l'URL de l'image
+    };
+    return headerMap[header] || header;
 }
 </script>

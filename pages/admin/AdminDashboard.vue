@@ -46,7 +46,6 @@ onMounted(() => {
     if (localStorage.getItem('role')) {
         userRole.value = localStorage.getItem('role');
     }
-    isLoading.value = false;
 });
 </script>
 
