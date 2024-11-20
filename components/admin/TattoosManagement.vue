@@ -171,6 +171,19 @@ async function fetchTattoos() {
     }
 }
 
+function mapTattooData(tattoo) {
+    return {
+        title: tattoo.nom,
+        price: parseFloat(tattoo.prix),
+        available: tattoo.available,
+        size: tattoo.size,
+        color: tattoo.couleur,
+        description: tattoo.description,
+        user_id: tattoo.artiste // ID de l'artiste
+    };
+}
+
+
 // Éditer un tattoo
 function editTattoo(tattoo) {
     selectedTattoo.value = {
@@ -189,17 +202,26 @@ function editTattoo(tattoo) {
 // Soumettre l'édition
 async function submitEdit(updatedTattoo) {
     try {
-        const payload = {
-            title: updatedTattoo.nom,
-            price: updatedTattoo.prix,
-            available: updatedTattoo.available,
-            size: updatedTattoo.size,
-            color: updatedTattoo.couleur,
-            description: updatedTattoo.description,
-            user_id: updatedTattoo.artiste // ID de l'artiste sélectionné
-        };
+        const formData = new FormData();
 
-        await apiClient.put(`/admin/tattoos/${updatedTattoo.id}`, payload);
+        formData.append('title', updatedTattoo.nom);
+        formData.append('price', updatedTattoo.prix);
+        formData.append('available', updatedTattoo.available);
+        formData.append('size', updatedTattoo.size);
+        formData.append('color', updatedTattoo.couleur);
+        formData.append('description', updatedTattoo.description);
+        formData.append('user_id', updatedTattoo.artiste);
+
+        if (updatedTattoo.image instanceof File) {
+            formData.append('image', updatedTattoo.image); // Ajout du fichier si présent
+        }
+
+        await apiClient.put(`/admin/tattoos/${updatedTattoo.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
         alert('Flash tattoo mis à jour avec succès.');
         closeEditModal();
         fetchTattoos();
@@ -224,17 +246,26 @@ function createTattoo() {
 // Soumettre la création
 async function submitCreate(newTattooData) {
     try {
-        const payload = {
-            title: newTattooData.nom,
-            price: parseFloat(newTattooData.prix),
-            available: newTattooData.available,
-            size: newTattooData.size,
-            color: newTattooData.couleur,
-            description: newTattooData.description,
-            user_id: newTattooData.artiste // ID de l'artiste sélectionné
-        };
+        const formData = new FormData();
 
-        await apiClient.post('/admin/tattoos', payload);
+        formData.append('title', newTattooData.nom);
+        formData.append('price', newTattooData.prix);
+        formData.append('available', newTattooData.available);
+        formData.append('size', newTattooData.size);
+        formData.append('color', newTattooData.couleur);
+        formData.append('description', newTattooData.description);
+        formData.append('user_id', newTattooData.artiste);
+
+        if (newTattooData.image) {
+            formData.append('image', newTattooData.image); // Ajout du fichier
+        }
+
+        await apiClient.post('/admin/tattoos', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
         alert('Flash tattoo créé avec succès.');
         closeCreateModal();
         fetchTattoos();

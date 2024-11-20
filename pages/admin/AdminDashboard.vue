@@ -13,6 +13,8 @@
 </template>
 
 <script setup>
+const isLoading = ref(false);
+
 import {ref} from 'vue';
 
 // Importez vos composants de section
@@ -44,6 +46,7 @@ onMounted(() => {
     if (localStorage.getItem('role')) {
         userRole.value = localStorage.getItem('role');
     }
+    isLoading.value = false;
 });
 </script>
 

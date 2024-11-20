@@ -132,6 +132,12 @@ watch(() => props.model, (newModel) => {
     });
 }, {immediate: true});
 
+function handleFileUpload(key, event) {
+    const file = event.target.files[0];
+    if (file) {
+        formData[key] = file; // Ajout du fichier à `formData`
+    }
+}
 
 // Emit the form data on submit
 function submitForm() {
