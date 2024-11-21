@@ -156,18 +156,19 @@ async function fetchArtists() {
 async function fetchTattoos() {
     try {
         const {data} = await apiClient.get('/admin/tattoos');
-        tattoos.value = data.map(tattoo => ({
+
+        tattoos.value = data.map((tattoo) => ({
             id: tattoo.id,
             artiste: tattoo.artist_name || 'Non renseigné', // Nom de l'artiste
-            nom: tattoo.title,
-            prix: `${tattoo.price} €`,
+            nom: tattoo.title || 'Non renseigné',
+            prix: tattoo.price ? `${tattoo.price} €` : 'Non renseigné',
             disponible: tattoo.available ? 'Oui' : 'Non',
-            taille: tattoo.size,
+            taille: tattoo.size || 'Non renseignée',
             couleur: tattoo.color ? 'Oui' : 'Non',
             description: tattoo.description || 'Non renseignée'
         }));
     } catch (error) {
-        console.error('Erreur lors de la récupération des tattoos :', error);
+        console.error('Erreur lors de la récupération des flash tattoos :', error);
     }
 }
 
