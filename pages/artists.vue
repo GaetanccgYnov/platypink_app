@@ -6,7 +6,7 @@
             <a :href="`artist/${artist.id}/detail`">
                 <img :src="artist.profile_image"
                      alt="Image de profil"
-                     class="mr-4 h-48 w-48" />
+                     class="mr-4 h-48" />
             </a>
             <div class="flex flex-col w-2/5 space-y-2">
                 <a :href="`artist/${artist.id}/detail`">

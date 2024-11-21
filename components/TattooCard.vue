@@ -1,7 +1,7 @@
 <template>
     <a :href="`/tattoo/${tattoo.id}/detail`">
         <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Placeholder image"
+            <img alt="Chargement de l'image..."
                  class="w-full h-96 object-cover rounded-lg mb-2"
                  :src="tattoo.image_url"
                  width="200"/>

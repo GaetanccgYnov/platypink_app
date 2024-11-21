@@ -59,7 +59,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f8f8f8;
 }
 
 .social-icons {

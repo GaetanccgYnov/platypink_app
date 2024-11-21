@@ -123,7 +123,7 @@
             <div class="flex items-center mb-4">
                 <input v-model="searchQuery"
                        class="flex-grow p-2 border border-gray-300 rounded-lg"
-                       placeholder="Search"
+                       placeholder="Rechercher"
                        type="text"
                        @keydown.enter="applyFilters"
                        @blur="applyFilters" />

@@ -19,7 +19,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="name"
                                    type="text"
-                                   placeholder="Value">
+                                   placeholder="John Doe">
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
@@ -29,7 +29,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="email"
                                    type="text"
-                                   placeholder="Value">
+                                   placeholder="john.doe@gmail.com">
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
@@ -39,7 +39,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="address"
                                    type="text"
-                                   placeholder="Value">
+                                   placeholder="10 Av. des Champs Elysées, Paris 75008">
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">
@@ -49,7 +49,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="phoneNumber"
                                    type="text"
-                                   placeholder="Value">
+                                   placeholder="+336 00 00 00 00">
                         </div>
                         <div class="mb-6">
                             <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -60,7 +60,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                    id="password"
                                    type="password"
-                                   placeholder="Value">
+                                   placeholder="Mot de passe">
                         </div>
                         <div class="mb-6">
                             <label class="flex items-center cursor-pointer">
@@ -81,17 +81,17 @@
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                        id="insta"
                                        type="text"
-                                       placeholder="Value">
+                                       placeholder="Instagram">
                             </div>
                             <div class="mb-6">
                                 <label class="block text-gray-700 text-sm font-bold mb-2"
-                                       for="facebook">
-                                    Facebook
+                                       for="linkedin">
+                                    Linkedin
                                 </label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                       id="facebook"
+                                       id="linkedin"
                                        type="text"
-                                       placeholder="Value">
+                                       placeholder="Linkedin">
                             </div>
                             <div class="mb-6">
                                 <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -101,7 +101,7 @@
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                        id="twitter"
                                        type="text"
-                                       placeholder="Value">
+                                       placeholder="Twitter">
                             </div>
                         </div>
                     </form>

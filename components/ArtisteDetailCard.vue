@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 bg-white shadow-md rounded-lg overflow-hidden flex">
         <div class="relative">
-            <img alt="Placeholder image"
+            <img alt="Chargement de l'image..."
                  class="object-cover h-64 w-64"
                  :src="artist.profile_image" />
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 bg-white shadow-md rounded-lg overflow-hidden flex">
         <div class="relative">
-            <img alt="Placeholder image"
+            <img alt="Chargement de l'image..."
                  class="object-cover h-96"
                  :src="tattoo.image_url" />
             <div class="absolute top-4 left-2 bg-black text-white rounded-full ml-2 flex items-center justify-center w-8 h-8"
