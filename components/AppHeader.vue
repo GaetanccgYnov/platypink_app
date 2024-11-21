@@ -55,7 +55,7 @@
             </div>
             <div v-else
                  class="flex items-center justify-end space-x-4 flex-1">
-                <button class="px-4 py-2 text-white rounded login-button"
+                <button class="px-4 py-2 text-white rounded login-button bg-secondary"
                         @click="logOut()">
                     Se déconnecter
                 </button>
@@ -116,43 +116,73 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+/* Logo */
 .hat-logo{
     width: 80%;
+    transition: transform 0.3s ease;
 }
 
+.hat-logo:hover{
+    transform: scale(1.1); /* Effet de zoom au survol */
+}
+
+/* Navigation Links - Default Style */
 nav a{
     padding: 8px 12px;
     border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, text-shadow 0.3s ease-in-out;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555; /* Couleur par défaut */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ombre légère */
 }
 
+/* Hover Effect for Navigation Links */
 nav a:hover{
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #e0e0e0;
+    color: #222; /* Couleur plus sombre au survol */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+    transform: translateY(-2px); /* Légère montée au survol */
+    font-weight: bold; /* Accentuation du texte */
 }
 
+/* Active Link */
 nav a.active{
     background-color: #333;
     color: #fff;
     font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre intense */
+    border: 1px solid #444; /* Ajout d'une bordure légère */
 }
 
+/* Login and Signup Buttons */
 .login-button{
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Transition fluide */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .login-button:hover{
     cursor: pointer;
-    background-color: #444; /* Couleur au survol */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
-    transform: translateY(-2px); /* Légère élévation */
+    background-color: #444;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
+/* Header Container */
+header{
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
 
+header:hover{
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Accentuation au survol */
+}
 </style>
+
