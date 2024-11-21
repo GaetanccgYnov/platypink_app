@@ -152,12 +152,12 @@ async function fetchBookings() {
         const response = await apiClient.get('/admin/bookings');
         bookings.value = response.data.bookings.map((booking) => ({
             id: booking.id,
-            client: booking.client_name,
-            artiste: booking.artist_name,
-            tattoo: booking.tattoo_title,
-            date: booking.date,
-            heure: booking.time,
-            statut: booking.status
+            client: booking.client_name || 'Non renseigné',
+            artiste: booking.artist_name || 'Non renseigné',
+            tattoo: booking.tattoo_title || 'Non renseigné',
+            date: booking.date || 'Non renseignée',
+            heure: booking.time || 'Non renseignée',
+            statut: booking.status || 'Non renseigné'
         }));
     } catch (error) {
         console.error('Erreur lors de la récupération des réservations :', error);

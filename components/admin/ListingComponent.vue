@@ -176,7 +176,18 @@ function headerKey(header) {
         'Taille': 'taille',
         'Couleur': 'couleur',
         'Description': 'description',
-        'Image': 'image_url' // Correspond bien à l'URL de l'image
+        'Image': 'image_url',
+        'Email': 'email',
+        'Rôle': 'rôle',
+        'Adresse': 'adresse',
+        'Téléphone': 'téléphone',
+        'Réseaux': 'réseaux',
+        'Artiste': 'artiste',
+        'Client': 'client',
+        'Tattoo': 'tattoo',
+        'Date': 'date',
+        'Heure': 'heure',
+        'Statut': 'statut'
     };
     return headerMap[header] || header;
 }
