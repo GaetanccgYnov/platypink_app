@@ -17,7 +17,6 @@
                 <a href="/tattoos" class="text-black">Tattoos</a>
                 <a href="/artists" class="text-black">Artistes</a>
                 <a v-if="userRole === 'admin'" href="/admin/AdminDashboard" class="text-black">Panel Admin</a>
-                <a v-if="userRole === 'client'" href="/favorites" class="text-black">Favoris</a>
                 <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageTattoos" class="text-black">Gestion des flashs</a>
             </nav>
 
