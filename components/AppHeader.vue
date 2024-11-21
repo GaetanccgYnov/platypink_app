@@ -14,27 +14,48 @@
             </div>
 
             <nav class="flex items-center justify-center space-x-4 flex-1">
-                <a href="/tattoos" class="text-black">Tattoos</a>
-                <a href="/artists" class="text-black">Artistes</a>
-                <a v-if="userRole === 'admin'" href="/admin/AdminDashboard" class="text-black">Panel Admin</a>
-                <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageTattoos" class="text-black">Gestion des flashs</a>
-                <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageBookings" class="text-black">Gestion des réservations</a>
+                <a
+                    href="/tattoos"
+                    :class="{ 'active': currentPage === '/tattoos' }"
+                    @click="setCurrentPage('/tattoos')">
+                    Tattoos
+                </a>
+                <a
+                    href="/artists"
+                    :class="{ 'active': currentPage === '/artists' }"
+                    @click="setCurrentPage('/artists')">
+                    Artistes
+                </a>
+                <a
+                    v-if="userRole === 'admin'"
+                    href="/admin/AdminDashboard"
+                    :class="{ 'active': currentPage === '/admin/AdminDashboard' }"
+                    @click="setCurrentPage('/admin/AdminDashboard')">
+                    Panel Admin
+                </a>
+                <a
+                    v-if="userRole === 'tattoo_artist'"
+                    href="/artist/ManageTattoos"
+                    :class="{ 'active': currentPage === '/artist/ManageTattoos' }"
+                    @click="setCurrentPage('/artist/ManageTattoos')">
+                    Gestion des flashs
+                </a>
             </nav>
 
             <div v-if="userRole === ''"
                  class="flex items-center justify-end space-x-4 flex-1">
-                <button class="px-4 py-2 border border-gray-400 rounded"
+                <button class="px-4 py-2 border border-gray-400 rounded text-white login-button bg-tertiary"
                         @click="openSigninModal = true">
                     Créer un compte
                 </button>
-                <button class="px-4 py-2 bg-black text-white rounded"
+                <button class="px-4 py-2 text-white rounded login-button bg-secondary"
                         @click="openLoginModal = true">
                     Se connecter
                 </button>
             </div>
             <div v-else
                  class="flex items-center justify-end space-x-4 flex-1">
-                <button class="px-4 py-2 bg-black text-white rounded"
+                <button class="px-4 py-2 text-white rounded login-button"
                         @click="logOut()">
                     Se déconnecter
                 </button>
@@ -68,11 +89,13 @@ export default {
             searchQuery: '',
             openLoginModal: false,
             openSigninModal: false,
-            userRole: ''
+            userRole: '',
+            currentPage: ''
         };
     },
     mounted() {
         this.userRole = localStorage.getItem('role') || '';
+        this.currentPage = window.location.pathname;
     },
     methods: {
         updateUserRole(role) {
@@ -85,6 +108,9 @@ export default {
             localStorage.clear();
             this.userRole = '';
             toast.add({title: 'Déconnexion réussie'});
+        },
+        setCurrentPage(page) {
+            this.currentPage = page; // Met à jour la page active
         }
     }
 };
@@ -94,4 +120,39 @@ export default {
 .hat-logo{
     width: 80%;
 }
+
+nav a{
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover{
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+nav a.active{
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+.login-button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Transition fluide */
+}
+
+.login-button:hover{
+    cursor: pointer;
+    background-color: #444; /* Couleur au survol */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+    transform: translateY(-2px); /* Légère élévation */
+}
+
+
 </style>
