@@ -18,6 +18,7 @@
                 <a href="/artists" class="text-black">Artistes</a>
                 <a v-if="userRole === 'admin'" href="/admin/AdminDashboard" class="text-black">Panel Admin</a>
                 <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageTattoos" class="text-black">Gestion des flashs</a>
+                <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageBookings" class="text-black">Gestion des réservations</a>
             </nav>
 
             <div v-if="userRole === ''"
@@ -77,6 +78,7 @@ export default {
         updateUserRole(role) {
             this.userRole = role;
             localStorage.setItem('role', role);
+            this.$router.push('/');
         },
         logOut() {
             const toast = useToast();

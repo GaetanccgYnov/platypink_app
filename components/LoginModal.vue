@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div v-if="errors"
                class="text-red-600">
-            <span>Email ou mot de passe incorrect</span>
+            <span>{{ errors.error }}</span>
           </div>
           <form>
             <div class="mb-4">
@@ -88,7 +88,7 @@ export default {
         this.$emit('updateUserRole', response.data.user.role);
         this.$emit('close');
       } catch (error) {
-        this.errors = true;
+        this.errors = error.response.data;
         toast.add({title: "Une erreur est survenue", color: 'red'});
       }
     },

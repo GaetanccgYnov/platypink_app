@@ -36,14 +36,26 @@
                 Réserver ce flash
             </button>
         </div>
+        <div v-if="openBookingModal"
+             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <Teleport to="body">
+                <booking-modal :show="openBookingModal"
+                               :artistId="tattoo.user_id"
+                               :flash-id="tattoo.id"
+                               @close="openBookingModal = false">
+                </booking-modal>
+            </Teleport>
+        </div>
     </div>
 </template>
 <script>
 
 import apiClient from '~/src/api/axiosConfig.js';
 import axios from "axios";
+import BookingModal from "~/components/BookingModal.vue";
 
 export default {
+    components: {BookingModal},
     props: {
         tattoo: Object
     },
@@ -52,14 +64,15 @@ export default {
             isFavorite: false,
             favoriteId: null,
             artisteId: null,
-            artisteName: null
+            artisteName: null,
+            openBookingModal: false
         }
     },
     methods: {
         bookTattoo() {
             const toast = useToast();
             if (localStorage.getItem('role')) {
-                toast.add({title: 'Vous êtes connecté pour réserver un flash'});
+                this.openBookingModal = true;
             } else {
                 toast.add({
                     title: 'Vous devez être connecté pour réserver un flash',
