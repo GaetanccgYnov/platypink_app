@@ -16,9 +16,9 @@
             <nav class="flex items-center justify-center space-x-4 flex-1">
                 <a href="/tattoos" class="text-black">Tattoos</a>
                 <a href="/artists" class="text-black">Artistes</a>
-                <a v-if="userRole === 'admin'" href="/" class="text-black">Panel Admin</a>
+                <a v-if="userRole === 'admin'" href="/admin/AdminDashboard" class="text-black">Panel Admin</a>
                 <a v-if="userRole === 'client'" href="/favorites" class="text-black">Favoris</a>
-                <a v-if="userRole === 'tattoo_artist'" href="/admin" class="text-black">Gestion des flashs</a>
+                <a v-if="userRole === 'tattoo_artist'" href="/artist/ManageTattoos" class="text-black">Gestion des flashs</a>
             </nav>
 
             <div v-if="userRole === ''"
@@ -29,14 +29,14 @@
                 </button>
                 <button class="px-4 py-2 bg-black text-white rounded"
                         @click="openLoginModal = true">
-                  Se connecter
+                    Se connecter
                 </button>
             </div>
             <div v-else
                  class="flex items-center justify-end space-x-4 flex-1">
                 <button class="px-4 py-2 bg-black text-white rounded"
                         @click="logOut()">
-                  Se déconnecter
+                    Se déconnecter
                 </button>
             </div>
         </div>
@@ -47,9 +47,6 @@
             <login-modal :show="openLoginModal"
                          @close="openLoginModal = false"
                          @updateUserRole="updateUserRole($event)">
-                <template #header>
-                    <h3>Custom Header</h3>
-                </template>
             </login-modal>
         </Teleport>
     </div>
@@ -59,9 +56,6 @@
             <signin-modal :show="openSigninModal"
                           @close="openSigninModal = false"
                           @updateUserRole="updateUserRole($event)">
-                <template #header>
-                    <h3>Custom Header</h3>
-                </template>
             </signin-modal>
         </Teleport>
     </div>
@@ -71,10 +65,10 @@
 export default {
     data() {
         return {
-            searchQuery: "",
+            searchQuery: '',
             openLoginModal: false,
             openSigninModal: false,
-            userRole: '',
+            userRole: ''
         };
     },
     mounted() {
@@ -91,12 +85,12 @@ export default {
             this.userRole = '';
             toast.add({title: 'Déconnexion réussie'});
         }
-    },
+    }
 };
 </script>
 
 <style>
-.hat-logo {
+.hat-logo{
     width: 80%;
 }
 </style>

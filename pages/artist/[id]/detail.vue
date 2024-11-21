@@ -1,12 +1,24 @@
 <template>
-  <section>
-    <p>This page will be displayed at the {{ id }} route.</p>
-  </section>
-  <ArtisteDetailCard />
+  <ArtisteDetailCard :artist="artist" />
 </template>
-<script setup>
-import { useRoute } from 'vue-router';
+<script>
+import axios from "axios";
 
-const route = useRoute();
-const id = route.params.id;
+export default {
+    data() {
+        return {
+            artist: []
+        };
+    },
+    beforeMount() {
+        try {
+            axios.get(`http://localhost:5000/users/${this.$route.params.id}`)
+                .then(response => {
+                    this.artist = response.data;
+                });
+        } catch (error) {
+            console.error('Erreur lors de la récupération du tatouage :', error);
+        }
+    },
+};
 </script>
