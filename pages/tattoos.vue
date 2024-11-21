@@ -3,7 +3,7 @@
 <div class="p-4 font-montserrat"
      id="app">
     <div class="flex">
-        <div class="w-1/4 p-4 bg-white rounded-lg shadow">
+        <div class="w-1/4 p-4 bg-gray-100 rounded-lg shadow">
             <div class="mb-4">
                 <h2 class="text-lg font-semibold mb-2">
                     Mots-clés

@@ -15,6 +15,9 @@
                 <h2 class="text-xl font-bold">
                     {{ tattoo.title }}
                 </h2>
+                <h2 class="text-xl">
+                    Tatoueur : <a class="underline cursor-pointer text-blue-500 ml-1" :href="`/artist/${artisteId}/detail`">{{ artisteName }}</a>
+                </h2>
                 <span class="inline-block bg-green-200 text-green-800 text-xs font-semibold mt-2 px-2 py-1 rounded">
                     {{ tattoo.color ? 'Couleur' : 'Noir et blanc' }}
                 </span>
@@ -38,6 +41,7 @@
 <script>
 
 import apiClient from '~/src/api/axiosConfig.js';
+import axios from "axios";
 
 export default {
     props: {
@@ -46,7 +50,9 @@ export default {
     data() {
         return {
             isFavorite: false,
-            favoriteId: null
+            favoriteId: null,
+            artisteId: null,
+            artisteName: null
         }
     },
     methods: {
@@ -93,6 +99,11 @@ export default {
     },
     async mounted() {
         await this.waitForTattoo();
+        axios.get(`http://localhost:5000/users/${this.tattoo.user_id}`)
+            .then(response => {
+                this.artisteId = this.tattoo.user_id;
+                this.artisteName = response.data.name;
+            });
         if (localStorage.getItem('token')) {
             apiClient.get(`/tattoos/${this.tattoo.id}/favorite`)
                 .then(response => {
