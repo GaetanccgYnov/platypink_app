@@ -18,7 +18,9 @@
                 <div v-for="tattoo in tattoos.slice(0, 9)"
                      :key="tattoo.id"
                      class="bg-white p-4 rounded-lg shadow-md align-center">
-                    <img :src="tattoo.image_url" alt="Artiste" class="object-cover h-full w-full" />
+                    <a :href="`/tattoo/${tattoo.id}/detail`">
+                        <img :src="tattoo.image_url" alt="Artiste" class="object-cover h-full w-full" />
+                    </a>
                 </div>
             </div>
         </div>

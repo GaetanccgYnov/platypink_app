@@ -150,7 +150,7 @@ export default {
         async submit() {
             const toast = useToast();
             try {
-                const response = await axios.post('http://localhost:5000/auth/register', {
+                await axios.post('http://localhost:5000/auth/register', {
                     name: this.name,
                     email: this.email,
                     phoneNumber: this.phoneNumber,
@@ -158,11 +158,16 @@ export default {
                     role: this.isTattooArtist ? 'tattoo_artist' : 'client',
                     password: this.password,
                 });
-                const token = response.data.token;
-                localStorage.setItem('token', token);
-                toast.add({title: 'Connexion réussie', description: 'Vous êtes maintenant connecté'});
-                this.$emit('updateUserRole', response.data.user.role);
-                this.$emit('close');
+                toast.add({title: 'Compte créé', description: 'Vous allez être connecté automatiquement'});
+                axios.post('http://localhost:5000/auth/login', {
+                    email: this.email,
+                    password: this.password,
+                }).then(response => {
+                    localStorage.setItem('token', response.data.token);
+                    toast.add({title: 'Connexion réussie', description: 'Vous êtes maintenant connecté'});
+                    this.$emit('updateUserRole', response.data.user.role);
+                    this.$emit('close');
+                });
             } catch (error) {
                 this.errors = true;
                 toast.add({title: "Une erreur est survenue", color: 'red'});
@@ -202,15 +207,6 @@ export default {
 .modal-default-button {
     float: right;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter-from {
     opacity: 0;
