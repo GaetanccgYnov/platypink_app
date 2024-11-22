@@ -54,15 +54,15 @@ import {useRoute} from 'vue-router';
 const route = useRoute();
 
 // Calcul pour déterminer si le footer doit être affiché
-const shouldDisplayFooter = computed(() => route.path !== '/admin/AdminDashboard');
+const shouldDisplayFooter = computed(() => route.path !== '/admin/admindashboard');
 </script>
 
 <style scoped>
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
 .social-icons{
