@@ -84,6 +84,11 @@
             </Teleport>
         </div>
     </div>
+    <div class="grid grid-cols-3 gap-4">
+        <TattooCard v-for="tattoo in tattoos"
+                    :key="tattoo"
+                    :tattoo="tattoo" />
+    </div>
 </template>
 <script>
 import axios from "axios";
@@ -94,8 +99,7 @@ export default {
     components: {ReviewsModal, ReviewModal},
     props: {
         artist: Object,
-        reviews: [],
-        avgRating: []
+        tattoos: Array
     },
     data() {
         return {

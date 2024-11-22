@@ -1,5 +1,6 @@
 <template>
-  <ArtisteDetailCard :artist="artist" />
+  <ArtisteDetailCard :artist="artist"
+                     :tattoos="tattoos"/>
 </template>
 <script>
 import axios from "axios";
@@ -7,7 +8,8 @@ import axios from "axios";
 export default {
     data() {
         return {
-            artist: []
+            artist: [],
+            tattoos: [],
         };
     },
     mounted() {
@@ -16,8 +18,12 @@ export default {
                 .then(response => {
                     this.artist = response.data;
                 });
+            axios.get(`http://localhost:5000/tattoos?user_id=${this.$route.params.id}`)
+                .then(response => {
+                    this.tattoos = response.data;
+                });
         } catch (error) {
-            console.error('Erreur lors de la récupération du tatouage :', error);
+            console.error('Erreur lors de la récupération des données :', error);
         }
     },
 };
