@@ -47,11 +47,11 @@ import EditModal from '@/components/admin/EditModal.vue';
 import DynamicForm from '@/components/admin/DynamicForm.vue';
 import apiClient from '~/src/api/axiosConfig.js';
 
-const users = ref([]); // Liste des utilisateurs
-const isEditModalVisible = ref(false); // État de visibilité du modal d'édition
-const isCreateModalVisible = ref(false); // État de visibilité du modal de création
-const selectedUser = ref(null); // Utilisateur sélectionné pour l'édition
-const newUser = ref({}); // Données pour un nouvel utilisateur
+const users = ref([]);
+const isEditModalVisible = ref(false);
+const isCreateModalVisible = ref(false);
+const selectedUser = ref(null);
+const newUser = ref({});
 
 // Configuration dynamique des champs
 const fields = ref([
@@ -99,7 +99,6 @@ const fields = ref([
         label: 'Réseaux',
         type: 'text'
     },
-    // Ajouter le champ pour le mot de passe
     {
         key: 'mot_de_passe',
         label: 'Mot de passe',
@@ -127,8 +126,8 @@ async function fetchUsers() {
 
 // Éditer un utilisateur
 function editUser(user) {
-    selectedUser.value = {...user}; // Charger les données de l'utilisateur
-    isEditModalVisible.value = true; // Afficher le modal d'édition
+    selectedUser.value = {...user};
+    isEditModalVisible.value = true;
 }
 
 // Soumettre l'édition
@@ -143,8 +142,8 @@ async function submitEdit(updatedUser) {
             social_links: updatedUser.réseaux
         });
         alert('Utilisateur mis à jour avec succès.');
-        closeEditModal(); // Fermer le modal d'édition
-        fetchUsers(); // Rafraîchir la liste des utilisateurs
+        closeEditModal();
+        fetchUsers();
     } catch (error) {
         console.error('Erreur lors de la mise à jour de l\'utilisateur :', error);
         alert('Une erreur est survenue lors de la mise à jour.');
@@ -159,8 +158,8 @@ function closeEditModal() {
 
 // Créer un utilisateur
 function createUser() {
-    newUser.value = {}; // Réinitialiser les données du formulaire
-    isCreateModalVisible.value = true; // Afficher le modal de création
+    newUser.value = {};
+    isCreateModalVisible.value = true;
 }
 
 // Soumettre la création
@@ -176,8 +175,8 @@ async function submitCreate(newUserData) {
             password: newUserData.mot_de_passe
         });
         alert('Utilisateur créé avec succès.');
-        closeCreateModal(); // Fermer le modal de création
-        fetchUsers(); // Rafraîchir la liste des utilisateurs
+        closeCreateModal();
+        fetchUsers();
     } catch (error) {
         console.error('Erreur lors de la création de l\'utilisateur :', error);
         alert('Une erreur est survenue lors de la création.');

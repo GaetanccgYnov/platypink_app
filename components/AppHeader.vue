@@ -110,7 +110,7 @@ export default {
             toast.add({title: 'Déconnexion réussie'});
         },
         setCurrentPage(page) {
-            this.currentPage = page; // Met à jour la page active
+            this.currentPage = page;
         }
     }
 };
@@ -124,7 +124,7 @@ export default {
 }
 
 .hat-logo:hover{
-    transform: scale(1.1); /* Effet de zoom au survol */
+    transform: scale(1.1);
 }
 
 /* Navigation Links - Default Style */
@@ -134,17 +134,17 @@ nav a{
     transition: background-color 0.3s, color 0.3s, text-shadow 0.3s ease-in-out;
     font-size: 16px;
     font-weight: 500;
-    color: #555; /* Couleur par défaut */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    color: #555;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Hover Effect for Navigation Links */
 nav a:hover{
     background-color: #e0e0e0;
-    color: #222; /* Couleur plus sombre au survol */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
-    transform: translateY(-2px); /* Légère montée au survol */
-    font-weight: bold; /* Accentuation du texte */
+    color: #222;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    font-weight: bold;
 }
 
 /* Active Link */
@@ -152,8 +152,8 @@ nav a.active{
     background-color: #333;
     color: #fff;
     font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre intense */
-    border: 1px solid #444; /* Ajout d'une bordure légère */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid #444;
 }
 
 /* Login and Signup Buttons */
@@ -182,7 +182,7 @@ header{
 }
 
 header:hover{
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Accentuation au survol */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 </style>
 

@@ -108,7 +108,7 @@ const editFields = ref([
 ]);
 
 // Champs pour la création
-const createFields = ref([...editFields.value]); // Identique aux champs d'édition
+const createFields = ref([...editFields.value]);
 
 // Récupérer les données nécessaires pour les selects
 async function fetchSelectData() {

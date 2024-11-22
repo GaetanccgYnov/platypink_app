@@ -126,21 +126,20 @@ const formData = reactive({});
 
 // Watch the `model` prop and initialize `formData`
 watch(() => props.model, (newModel) => {
-    // Copie réactive de toutes les propriétés
     Object.keys(newModel).forEach((key) => {
-        formData[key] = newModel[key] ?? ''; // Assigner une valeur par défaut si absente
+        formData[key] = newModel[key] ?? '';
     });
 }, {immediate: true});
 
 function handleFileUpload(key, event) {
     const file = event.target.files[0];
     if (file) {
-        formData[key] = file; // Ajout du fichier à `formData`
+        formData[key] = file;
     }
 }
 
 // Emit the form data on submit
 function submitForm() {
-    emit('submit', formData); // Emit the modified form data
+    emit('submit', formData);
 }
 </script>

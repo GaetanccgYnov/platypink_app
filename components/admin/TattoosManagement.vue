@@ -52,7 +52,7 @@ const isEditModalVisible = ref(false);
 const isCreateModalVisible = ref(false);
 const selectedTattoo = ref(null);
 const newTattoo = ref({});
-const artists = ref([]); // Liste des artistes pour le select
+const artists = ref([]);
 
 // Champs dynamiques
 const fields = ref([
@@ -159,7 +159,7 @@ async function fetchTattoos() {
 
         tattoos.value = data.map((tattoo) => ({
             id: tattoo.id,
-            artiste: tattoo.artist_name || 'Non renseigné', // Nom de l'artiste
+            artiste: tattoo.artist_name || 'Non renseigné',
             nom: tattoo.title || 'Non renseigné',
             prix: tattoo.price ? `${tattoo.price} €` : 'Non renseigné',
             disponible: tattoo.available ? 'Oui' : 'Non',
@@ -180,7 +180,7 @@ function mapTattooData(tattoo) {
         size: tattoo.size,
         color: tattoo.couleur,
         description: tattoo.description,
-        user_id: tattoo.artiste // ID de l'artiste
+        user_id: tattoo.artiste
     };
 }
 
@@ -214,7 +214,7 @@ async function submitEdit(updatedTattoo) {
         formData.append('user_id', updatedTattoo.artiste);
 
         if (updatedTattoo.image instanceof File) {
-            formData.append('image', updatedTattoo.image); // Ajout du fichier si présent
+            formData.append('image', updatedTattoo.image);
         }
 
         await apiClient.put(`/admin/tattoos/${updatedTattoo.id}`, formData, {
@@ -258,7 +258,7 @@ async function submitCreate(newTattooData) {
         formData.append('user_id', newTattooData.artiste);
 
         if (newTattooData.image) {
-            formData.append('image', newTattooData.image); // Ajout du fichier
+            formData.append('image', newTattooData.image);
         }
 
         await apiClient.post('/admin/tattoos', formData, {
