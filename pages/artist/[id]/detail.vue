@@ -10,7 +10,7 @@ export default {
             artist: []
         };
     },
-    beforeMount() {
+    mounted() {
         try {
             axios.get(`http://localhost:5000/users/${this.$route.params.id}`)
                 .then(response => {

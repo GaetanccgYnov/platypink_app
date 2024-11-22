@@ -110,8 +110,8 @@ export default {
             }
         },
     },
-    async mounted() {
-        await this.waitForTattoo();
+    mounted() {
+        this.waitForTattoo();
         axios.get(`http://localhost:5000/users/${this.tattoo.user_id}`)
             .then(response => {
                 this.artisteId = this.tattoo.user_id;

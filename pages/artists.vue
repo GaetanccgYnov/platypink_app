@@ -83,7 +83,6 @@ export default {
                          let average = this.reviews[artist.id].length > 0 ? totalRating / this.reviews[artist.id].length : 0;
                          this.avgRating[artist.id] = Math.round(average * 2) / 2;
                      });
-                console.log(this.avgRating[artist.id]);
             });
         } catch (error) {
             console.error('Erreur lors de la récupération des artistes :', error);

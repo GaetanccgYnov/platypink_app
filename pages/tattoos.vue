@@ -330,15 +330,6 @@ export default {
     },
     mounted() {
         this.isConnected = !!localStorage.getItem('token');
-        // if (this.isConnected) {
-        //     apiClient.get('/favorites')
-        //         .then(response => {
-        //             this.favoriteTattoos = response.data;
-        //         });
-        //     console.log(this.favoriteTattoos)
-        // }
-    },
-    beforeMount() {
         try {
             axios.get('http://localhost:5000/tattoos')
                  .then(response => {

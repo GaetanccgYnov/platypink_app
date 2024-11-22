@@ -11,7 +11,7 @@ export default {
             tattoo: []
         };
     },
-    beforeMount() {
+    mounted() {
         try {
             axios.get(`http://localhost:5000/tattoos/${this.$route.params.id}`)
                  .then(response => {

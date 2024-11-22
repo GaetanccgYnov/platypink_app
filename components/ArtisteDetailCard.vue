@@ -137,8 +137,8 @@ export default {
             }
         },
     },
-    async mounted() {
-        await this.waitForArtist();
+    mounted() {
+        this.waitForArtist();
         try {
             axios.get(`http://localhost:5000/reviews?tattoo_artist_id=${this.artist.id}`)
                 .then(response => {

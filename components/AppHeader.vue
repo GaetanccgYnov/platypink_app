@@ -40,6 +40,20 @@
                     @click="setCurrentPage('/artist/ManageTattoos')">
                     Gestion des flashs
                 </a>
+                <a
+                    v-if="userRole === 'tattoo_artist'"
+                    href="/artist/ManageBookings"
+                    class="text-black"
+                    @click="setCurrentPage('/artist/ManageBookings')">
+                    Gestion des réservations
+                </a>
+                <a
+                    v-if="userRole === 'client'"
+                    href="/user/ManageBookings"
+                    class="text-black"
+                    @click="setCurrentPage('/user/ManageBookings')">
+                    Voir mes réservations
+                </a>
             </nav>
 
             <div v-if="userRole === ''"
@@ -101,13 +115,13 @@ export default {
         updateUserRole(role) {
             this.userRole = role;
             localStorage.setItem('role', role);
-            this.$router.push('/');
         },
         logOut() {
             const toast = useToast();
             localStorage.clear();
             this.userRole = '';
             toast.add({title: 'Déconnexion réussie'});
+            this.$router.push('/');
         },
         setCurrentPage(page) {
             this.currentPage = page;

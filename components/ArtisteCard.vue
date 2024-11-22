@@ -83,7 +83,7 @@ export default {
             }
         };
     },
-    beforeMount() {
+    mounted() {
         try {
             axios.get('http://localhost:5000/tattoos')
                  .then(response => {
