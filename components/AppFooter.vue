@@ -53,8 +53,8 @@ import {useRoute} from 'vue-router';
 
 const route = useRoute();
 
-// Calcul pour déterminer si le footer doit être affiché
-const shouldDisplayFooter = computed(() => route.path !== '/admin/admindashboard');
+const shouldDisplayFooter = computed(() => !route.path.startsWith('/admin/'));
+
 </script>
 
 <style scoped>

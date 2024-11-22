@@ -96,11 +96,11 @@ const fields = ref([
     },
     {
         key: 'réseaux',
-        label: 'Réseaux',
+        label: 'Réseaux (reseau: nom, ...)',
         type: 'text'
     },
     {
-        key: 'mot_de_passe',
+        key: 'password',
         label: 'Mot de passe',
         type: 'password'
     }
@@ -126,21 +126,48 @@ async function fetchUsers() {
 
 // Éditer un utilisateur
 function editUser(user) {
-    selectedUser.value = {...user};
+    const socialLinks = user.réseaux !== 'Non renseigné' ? JSON.parse(user.réseaux) : {};
+
+    const formattedLinks = Object.entries(socialLinks)
+                                 .map(([key, value]) => `${key}: ${value}`)
+                                 .join(', ');
+
+    selectedUser.value = {
+        ...user,
+        réseaux: formattedLinks
+    };
+
     isEditModalVisible.value = true;
 }
+
 
 // Soumettre l'édition
 async function submitEdit(updatedUser) {
     try {
-        await apiClient.put(`/admin/users/${updatedUser.id}`, {
+        const payload = {
             name: updatedUser.nom,
             email: updatedUser.email,
             role: updatedUser.rôle,
             address: updatedUser.adresse,
             phone_number: updatedUser.téléphone,
-            social_links: updatedUser.réseaux
-        });
+            social_links: null
+        };
+
+        if (updatedUser.réseaux) {
+            payload.social_links = updatedUser.réseaux.split(',').reduce((acc, item) => {
+                const [key, value] = item.split(':').map(str => str.trim());
+                if (key && value) acc[key] = value;
+                return acc;
+            }, {});
+        }
+
+        // Si le mot de passe est renseigné, on l'ajoute au payload
+        if (updatedUser.password) {
+            payload.password = updatedUser.password;
+        }
+
+        // Envoi du PUT avec le bon format pour 'social_links'
+        await apiClient.put(`/admin/users/${updatedUser.id}`, payload);
         alert('Utilisateur mis à jour avec succès.');
         closeEditModal();
         fetchUsers();
@@ -172,7 +199,7 @@ async function submitCreate(newUserData) {
             address: newUserData.adresse,
             phone_number: newUserData.téléphone,
             social_links: newUserData.réseaux,
-            password: newUserData.mot_de_passe
+            password: newUserData.password
         });
         alert('Utilisateur créé avec succès.');
         closeCreateModal();
